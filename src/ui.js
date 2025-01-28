@@ -15,4 +15,35 @@ function addProjectUI(project){
     menu.insertBefore(menuItem, newProjectButton);
 }
 
-export { addProjectUI };
+function addTaskUI(task){
+    const taskGrid = document.querySelector('.task-grid');
+    const taskCard = document.createElement('div');
+    taskCard.classList.add('task-card');
+    const taskHeader = document.createElement('div');
+    taskHeader.classList.add('task-header');
+    const taskTitle = document.createElement('div');
+    taskTitle.classList.add('task-title');
+    taskTitle.textContent = task.title;
+    const doneButton = document.createElement('div');
+    doneButton.classList.add('done-button');
+    const taskPriority = document.createElement('div');
+    taskPriority.classList.add('task-priority');
+    taskPriority.textContent = task.priority;
+    const taskDate = document.createElement('div');
+    taskDate.classList.add('task-date');
+    taskDate.textContent = task.dueDate;
+    const taskDesc = document.createElement('div');
+    taskDesc.classList.add('task-desc');
+    taskDesc.textContent = task.description;
+
+    taskHeader.appendChild(taskTitle);
+    taskHeader.appendChild(doneButton);
+    taskCard.appendChild(taskHeader);
+    taskCard.appendChild(taskPriority);
+    taskCard.appendChild(taskDate);
+    taskCard.appendChild(taskDesc);
+    taskGrid.appendChild(taskCard);
+}
+
+
+export { addProjectUI, addTaskUI };

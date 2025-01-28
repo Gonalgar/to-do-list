@@ -115,6 +115,13 @@ body {
     font-size: 14px;
     color: gray;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: auto;
+    width: 100%;
 }
 
 .task-date {

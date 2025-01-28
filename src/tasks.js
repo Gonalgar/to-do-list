@@ -1,15 +1,15 @@
 class Project {
     constructor(title) {
-        this.title = title;
+        this._title = title;
         this.tasks = [];
     }
 
-    set title(title) {
-        this.title = title;
+    set title(projectTitle) {
+        this._title = projectTitle;
     }
 
     get title() {
-        return this.title;
+        return this._title;
     }
 
     addTask(task) {
@@ -24,42 +24,42 @@ class Project {
 class Task {
 
     constructor(title, description, dueDate, priority) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
+        this._title = title;
+        this._description = description;
+        this._dueDate = dueDate;
+        this._priority = priority;
     }
 
-    set title(title) {
-        this.title = title;
+    set title(taskTitle) {
+        this._title = taskTitle;
     }
 
     get title() {
-        return this.title;
+        return this._title;
     }
   
     set description(description) {
-        this.description = description;
+        this._description = description;
     }
 
     get description() {
-        return this.description;
+        return this._description;
     }
 
     set dueDate(dueDate) {
-        this.dueDate = dueDate;
+        this._dueDate = dueDate;
     }
 
     get dueDate() {
-        return this.dueDate;
+        return this._dueDate;
     }
 
     set priority(priority) {
-        this.priority = priority;
+        this._priority = priority;
     }
 
     get priority() {
-        return this.priority;
+        return this._priority;
     }
 }
 

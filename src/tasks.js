@@ -1,5 +1,6 @@
 class Project {
     constructor(title) {
+        this.id = Date.now().toString();
         this._title = title;
         this.tasks = [];
     }
@@ -22,12 +23,13 @@ class Project {
 }
 
 class Task {
-
     constructor(title, description, dueDate, priority) {
+        this.id = Date.now().toString();
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;
         this._priority = priority;
+        this._done = false
     }
 
     set title(taskTitle) {
@@ -60,6 +62,14 @@ class Task {
 
     get priority() {
         return this._priority;
+    }
+
+    set done(done) {
+        this._done = done;
+    }
+
+    get done() {
+        return this._done;
     }
 }
 

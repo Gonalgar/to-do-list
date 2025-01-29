@@ -18,7 +18,7 @@ class Project {
     }
 
     deleteTask(task) {
-        this.tasks = this.tasks.filter(t => t !== task);
+        this.tasks = this.tasks.filter(t => t.id !== task.id);
     }
 }
 
@@ -29,7 +29,7 @@ class Task {
         this._description = description;
         this._dueDate = dueDate;
         this._priority = priority;
-        this._done = false
+        this._done = false;
     }
 
     set title(taskTitle) {
@@ -39,7 +39,7 @@ class Task {
     get title() {
         return this._title;
     }
-  
+
     set description(description) {
         this._description = description;
     }

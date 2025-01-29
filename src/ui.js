@@ -8,7 +8,7 @@ function addProjectUI(project){
     const icon = document.createElement('span');
     icon.textContent = '🛠️';
     const name = document.createElement('span');
-    name.textContent = project.title;
+    name.textContent = project._title;
 
     menuItem.appendChild(icon);
     menuItem.appendChild(name);
@@ -19,6 +19,7 @@ function addTaskUI(task){
     const taskGrid = document.querySelector('.task-grid');
     const taskCard = document.createElement('div');
     taskCard.classList.add('task-card');
+    taskCard.setAttribute('data-task-id', task.id);
     const taskHeader = document.createElement('div');
     taskHeader.classList.add('task-header');
     const taskTitle = document.createElement('div');
@@ -45,5 +46,26 @@ function addTaskUI(task){
     taskGrid.appendChild(taskCard);
 }
 
+function populateProjectsUI(projects){
+    const newProjectButton = document.querySelector('.menu-item.add-project');
+    const menu = document.querySelector('.menu');
+    menu.innerHTML = '';
 
-export { addProjectUI, addTaskUI };
+    projects.forEach(project => {
+        addProjectUI(project);
+    });
+
+    menu.appendChild(newProjectButton);
+}
+
+function populateTasksUI(tasks){
+    const taskGrid = document.querySelector('.task-grid');
+    taskGrid.innerHTML = '';
+
+    tasks.forEach(task => {
+        addTaskUI(task);
+    });
+}
+
+
+export { addProjectUI, addTaskUI, populateProjectsUI, populateTasksUI };

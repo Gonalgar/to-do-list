@@ -60,6 +60,22 @@
             </div>
         </div>
     </div>
+    <dialog class="add-project-dialog">
+        <div class="add-project-form-div">
+            <h2>New Project</h2>
+            <form id="add-project-form">
+                <div class="field">
+                    <input type="text" class="project-name" name="project name" pattern=".{1,}"
+                        placeholder="Project Name" required>
+                </div>
+
+                <div class="buttons">
+                    <button class="cancel-project-btn cancel-btn" type="button">Cancel</button>
+                    <button class="create-project-btn ok-btn" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 </body>
 
 </html>

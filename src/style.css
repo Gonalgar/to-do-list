@@ -184,3 +184,82 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+dialog[open] {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+dialog > div {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    gap: 15px;
+
+    p {
+        margin: 5px;
+    }
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 1rem;
+}
+
+input::selection {
+    background-color: #c3c3c3;
+    color: white;
+}
+
+dialog button {
+    padding: 10px 15px;
+    border-radius: 2rem;
+    border: 3px solid #f6f6f6;
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+dialog button.ok-btn {
+    background-color: black;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+dialog button.cancel-btn:hover {
+    background-color: #f6f6f6;
+    color: black;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: flex-end;
+    gap: 10px;
+    margin-left: auto;
+}

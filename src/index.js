@@ -17,32 +17,57 @@ if (projects.length == 0) {
 populateProjectsUI(projects);
 populateTasksUI(projects[0].tasks);
 
+let activeProject = projects[0];
 
 const addProjectButton = document.querySelector(".menu-item.add-project");
+const addProjectForm = document.querySelector("#add-project-form");
+const addTaskForm = document.querySelector("#add-task-form");
 
-const ProjectDialog = document.querySelector(".add-project-dialog");
+const projectDialog = document.querySelector(".add-project-dialog");
 addProjectButton.addEventListener("click", () => {
-    ProjectDialog.showModal();
+    addProjectForm.reset();
+    projectDialog.showModal();
 });
 
 const cancelProjectButton = document.querySelector(".cancel-project-btn");
 cancelProjectButton.addEventListener("click", () => {
-    ProjectDialog.close();
+    projectDialog.close();
 });
 
 
-ProjectDialog.querySelector(".create-project-btn").addEventListener("click", () => {
-    const projectName = ProjectDialog.querySelector(".project-name").value;
+addProjectForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const projectName = projectDialog.querySelector(".project-name").value;
     const project = new Project(projectName);
     projects.push(project);
     addProjectUI(project);
     saveData(projects);
-    ProjectDialog.close();
+    projectDialog.close();
 });
-
 
 const addTaskButton = document.querySelector(".add-task");
 const taskDialog = document.querySelector(".add-task-dialog");
+
 addTaskButton.addEventListener("click", () => {
+    addTaskForm.reset();
     taskDialog.showModal();
+});
+
+const cancelTaskButton = document.querySelector(".cancel-task-btn");
+cancelTaskButton.addEventListener("click", () => {
+    taskDialog.close();
+});
+
+
+addTaskForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const taskName = taskDialog.querySelector(".task-name").value;
+    const taskDescription = taskDialog.querySelector(".description").value;
+    const taskDueDate = taskDialog.querySelector(".date").value;
+    const taskPriority = taskDialog.querySelector(".priority").value;
+    const task = new Task(taskName, taskDescription, taskDueDate, taskPriority);
+    activeProject.addTask(task);
+    populateTasksUI(activeProject.tasks);
+    saveData(projects);
+    taskDialog.close();
 });

@@ -76,6 +76,39 @@
             </form>
         </div>
     </dialog>
+    <dialog class="add-task-dialog">
+        <div class="add-task-form-div">
+            <h2>New Task</h2>
+            <form id="add-task-form">
+                <div class="field">
+                    <p>Name</p>
+                    <input type="text" class="task-name" name="task name" pattern=".{1,}" placeholder="Task Name"
+                        required>
+                </div>
+                <div class="field">
+                    <p>Priority</p>
+                    <select class="priority" name="priority" required>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <p>Description</p>
+                    <textarea class="description" name="description" placeholder="Description" rows="3"></textarea>
+                </div>
+                <div class="field">
+                    <p>Date</p>
+                    <input class="date" type="date" name="date" min="2000-01-01" required>
+                </div>
+
+                <div class="buttons">
+                    <button class="cancel-task-btn cancel-btn" type="button">Cancel</button>
+                    <button class="create-task-btn ok-btn" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 </body>
 
 </html>

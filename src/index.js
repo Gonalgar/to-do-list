@@ -38,6 +38,13 @@ cancelProjectButton.addEventListener("click", () => {
 addProjectForm.addEventListener("submit", function(event) {
     event.preventDefault();
     const projectName = projectDialog.querySelector(".project-name").value;
+
+    const projectExists = projects.some(project => project.title === projectName);
+    if (projectExists) {
+        alert("A project with this name already exists. Please choose a different name.");
+        return;
+    }
+
     const project = new Project(projectName);
     projects.push(project);
     addProjectUI(project);

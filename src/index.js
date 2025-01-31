@@ -1,10 +1,9 @@
-import "./style.css"
-import { Project, Task } from "./tasks"
-import { addProjectUI, addTaskUI, populateProjectsUI, populateTasksUI } from "./ui"
-import { loadData, saveData } from "./storage"
+import "./style.css";
+import { Project, Task } from "./tasks";
+import { addProjectUI, addTaskUI, populateProjectsUI, populateTasksUI } from "./ui";
+import { loadData, saveData } from "./storage";
 
 const projects = loadData();
-
 
 if (projects.length == 0) {
     const project = new Project("Home");
@@ -18,6 +17,12 @@ populateProjectsUI(projects);
 populateTasksUI(projects[0].tasks);
 
 let activeProject = projects[0];
+
+document.querySelectorAll('.menu-item').forEach(item => {
+    if (item.querySelector('span:nth-child(2)').textContent === activeProject.title) {
+        item.classList.add('active-project');
+    }
+});
 
 const addProjectButton = document.querySelector(".menu-item.add-project");
 const addProjectForm = document.querySelector("#add-project-form");
@@ -33,7 +38,6 @@ const cancelProjectButton = document.querySelector(".cancel-project-btn");
 cancelProjectButton.addEventListener("click", () => {
     projectDialog.close();
 });
-
 
 addProjectForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -65,7 +69,6 @@ cancelTaskButton.addEventListener("click", () => {
     taskDialog.close();
 });
 
-
 addTaskForm.addEventListener("submit", function(event) {
     event.preventDefault();
     const taskName = taskDialog.querySelector(".task-name").value;
@@ -77,4 +80,17 @@ addTaskForm.addEventListener("submit", function(event) {
     populateTasksUI(activeProject.tasks);
     saveData(projects);
     taskDialog.close();
+});
+
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        const projectName = e.target.querySelector('span:nth-child(2)').textContent;
+        const newActiveProject = projects.find(project => project.title === projectName);
+        if (newActiveProject) {
+            document.querySelector('.active-project').classList.remove('active-project');
+            e.target.classList.add('active-project');
+            activeProject = newActiveProject;
+            populateTasksUI(activeProject.tasks);
+        }
+    });
 });

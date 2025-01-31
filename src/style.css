@@ -57,6 +57,11 @@ body {
     margin-left: 10px;
 }
 
+.active-project {
+    background-color: black;
+    color: white;
+}
+
 .badge {
     margin-left: auto;
     background: var(--high-priority);

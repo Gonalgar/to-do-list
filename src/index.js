@@ -206,10 +206,23 @@ cancelEditTaskButton.addEventListener("click", () => {
     editTaskDialog.close();
 });
 
+const deleteTaskButton = document.querySelector(".delete-task-btn");
+deleteTaskButton.addEventListener("click", () => {
+    const taskId = editTaskForm.getAttribute('data-task-id');
+    const taskIndex = activeProject.tasks.findIndex(t => t.id === taskId);
+    if (taskIndex !== -1) {
+        activeProject.tasks.splice(taskIndex, 1);
+        saveData(projects);
+        populateTasksUI(activeProject.tasks);
+        addTaskCardEventListeners();
+        editTaskDialog.close();
+    }
+});
+
 document.querySelectorAll('.menu-item').forEach(item => {
     if (!item.classList.contains('add-project')) {
         item.addEventListener('click', (e) => {
-            const projectName = e.target.querySelector('span:nth-child(2)').textContent;
+            const projectName = item.querySelector('span:nth-child(2)').textContent;
             const newActiveProject = projects.find(project => project.title === projectName);
             if (newActiveProject) {
                 document.querySelector('.active-project').classList.remove('active-project');

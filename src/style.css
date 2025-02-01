@@ -310,3 +310,12 @@ select {
 input[type="date"] {
     width: fit-content;
 }
+
+.delete-btn {
+    background-color: red;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}

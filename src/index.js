@@ -3,6 +3,25 @@ import { Project, Task } from "./tasks";
 import { addProjectUI, addTaskUI, populateProjectsUI, populateTasksUI } from "./ui";
 import { loadData, saveData } from "./storage";
 
+
+function addTaskCardEventListeners() {
+    document.querySelectorAll('.task-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const taskId = card.getAttribute('data-task-id');
+            const task = activeProject.tasks.find(t => t.id === taskId);
+            if (task) {
+                editTaskForm.querySelector(".edit-task-name").value = task.title;
+                editTaskForm.querySelector(".edit-description").value = task.description;
+                editTaskForm.querySelector(".edit-date").value = task.dueDate;
+                editTaskForm.querySelector(".edit-priority").value = task.priority;
+                editTaskForm.setAttribute('data-task-id', task.id);
+                editTaskDialog.showModal();
+            }
+        });
+    });
+}
+
+
 const projects = loadData();
 
 if (projects.length == 0) {
@@ -15,6 +34,7 @@ if (projects.length == 0) {
 
 populateProjectsUI(projects);
 populateTasksUI(projects[0].tasks);
+addTaskCardEventListeners();
 
 let activeProject = projects[0];
 
@@ -27,8 +47,12 @@ document.querySelectorAll('.menu-item').forEach(item => {
 const addProjectButton = document.querySelector(".menu-item.add-project");
 const addProjectForm = document.querySelector("#add-project-form");
 const addTaskForm = document.querySelector("#add-task-form");
+const editTaskForm = document.querySelector("#edit-task-form");
 
 const projectDialog = document.querySelector(".add-project-dialog");
+const taskDialog = document.querySelector(".add-task-dialog");
+const editTaskDialog = document.querySelector(".edit-task-dialog");
+
 addProjectButton.addEventListener("click", () => {
     addProjectForm.reset();
     projectDialog.showModal();
@@ -57,7 +81,6 @@ addProjectForm.addEventListener("submit", function(event) {
 });
 
 const addTaskButton = document.querySelector(".add-task");
-const taskDialog = document.querySelector(".add-task-dialog");
 
 addTaskButton.addEventListener("click", () => {
     addTaskForm.reset();
@@ -80,6 +103,12 @@ addTaskForm.addEventListener("submit", function(event) {
     populateTasksUI(activeProject.tasks);
     saveData(projects);
     taskDialog.close();
+    addTaskCardEventListeners();
+});
+
+const cancelEditTaskButton = document.querySelector(".cancel-edit-task-btn");
+cancelEditTaskButton.addEventListener("click", () => {
+    editTaskDialog.close();
 });
 
 document.querySelectorAll('.menu-item').forEach(item => {
@@ -91,6 +120,23 @@ document.querySelectorAll('.menu-item').forEach(item => {
             e.target.classList.add('active-project');
             activeProject = newActiveProject;
             populateTasksUI(activeProject.tasks);
+            addTaskCardEventListeners();
         }
     });
+});
+
+editTaskForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const taskId = editTaskForm.getAttribute('data-task-id');
+    const task = activeProject.tasks.find(t => t.id === taskId);
+    if (task) {
+        task.title = editTaskForm.querySelector(".edit-task-name").value;
+        task.description = editTaskForm.querySelector(".edit-description").value;
+        task.dueDate = editTaskForm.querySelector(".edit-date").value;
+        task.priority = editTaskForm.querySelector(".edit-priority").value;
+        populateTasksUI(activeProject.tasks);
+        saveData(projects);
+        editTaskDialog.close();
+        addTaskCardEventListeners();
+    }
 });

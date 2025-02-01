@@ -29,6 +29,11 @@ function addTaskUI(task){
     doneButton.classList.add('done-button');
     const taskPriority = document.createElement('div');
     taskPriority.classList.add('task-priority');
+    if (task.priority === 'Medium') {
+        taskPriority.classList.add('medium');
+    } else if (task.priority === 'Low') {
+        taskPriority.classList.add('low');
+    }
     taskPriority.textContent = task.priority;
     const taskDate = document.createElement('div');
     taskDate.classList.add('task-date');

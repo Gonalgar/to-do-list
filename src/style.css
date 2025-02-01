@@ -145,6 +145,14 @@ body {
     margin-bottom: 15px;
 }
 
+.task-priority.medium {
+    background: var(--medium-priority);
+}
+
+.task-priority.low {
+    background: var(--low-priority);
+}
+
 .header {
     display: flex;
     justify-content: flex-start;

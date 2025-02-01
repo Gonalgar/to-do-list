@@ -2,6 +2,20 @@ import "./style.css";
 import { Project, Task } from "./tasks";
 import { loadData, saveData } from "./storage";
 
+function addMenuItemEventListeners() {
+    document.querySelectorAll('.menu-item').forEach(item => {
+        if (!item.classList.contains('add-project')) {
+            item.addEventListener('click', (e) => {
+                const projectName = item.querySelector('span:nth-child(2)').textContent;
+                const newActiveProject = projects.find(project => project.title === projectName);
+                if (newActiveProject) {
+                    setActiveProject(newActiveProject);
+                }
+            });
+        }
+    });
+}
+
 function addProjectUI(project) {
     const newProjectButton = document.querySelector('.menu-item.add-project');
     const menu = document.querySelector('.menu');
@@ -87,6 +101,7 @@ function populateProjectsUI(projects) {
     });
 
     menu.appendChild(newProjectButton);
+    addMenuItemEventListeners();
 }
 
 function populateTasksUI(tasks) {
@@ -266,18 +281,6 @@ editProjectForm.addEventListener("submit", function(e) {
     }
 });
 
-document.querySelectorAll('.menu-item').forEach(item => {
-    if (!item.classList.contains('add-project')) {
-        item.addEventListener('click', (e) => {
-            const projectName = item.querySelector('span:nth-child(2)').textContent;
-            const newActiveProject = projects.find(project => project.title === projectName);
-            if (newActiveProject) {
-                setActiveProject(newActiveProject);
-            }
-        });
-    }
-});
-
 editTaskForm.addEventListener("submit", function(event) {
     event.preventDefault();
     const taskId = editTaskForm.getAttribute('data-task-id');
@@ -293,3 +296,5 @@ editTaskForm.addEventListener("submit", function(event) {
         addTaskCardEventListeners();
     }
 });
+
+addMenuItemEventListeners();

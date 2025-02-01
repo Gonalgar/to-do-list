@@ -35,7 +35,8 @@ function addTaskUI(task) {
     if (task.done) {
         doneButton.classList.add('done');
     }
-    doneButton.addEventListener('click', () => {
+    doneButton.addEventListener('click', (e) => {
+        e.stopPropagation();
         task.done = !task.done;
         taskCard.classList.toggle('done');
         doneButton.classList.toggle('done');

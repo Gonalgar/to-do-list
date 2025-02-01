@@ -48,9 +48,21 @@ body {
     cursor: pointer;
 }
 
-.menu-item:hover, .active {
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: auto;
+}
+
+.menu-item:hover, .active-project {
     background-color: black;
     color: white;
+
+    .menu-button {
+        color: white;
+    }
 }
 
 .menu-item span {

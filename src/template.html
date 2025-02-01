@@ -76,6 +76,23 @@
             </form>
         </div>
     </dialog>
+    <dialog class="edit-project-dialog">
+        <div class="edit-project-form-div">
+            <h2>Edit Project</h2>
+            <form id="edit-project-form">
+                <div class="field">
+                    <p>Name</p>
+                    <input type="text" class="edit-project-name" name="project name" pattern=".{1,}"
+                        placeholder="Project Name" required>
+                </div>
+                <div class="buttons">
+                    <button class="cancel-edit-project-btn cancel-btn" type="button">Cancel</button>
+                    <button class="delete-project-btn delete-btn" type="button">Delete</button>
+                    <button class="save-edit-project-btn ok-btn" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
     <dialog class="add-task-dialog">
         <div class="add-task-form-div">
             <h2>New Task</h2>

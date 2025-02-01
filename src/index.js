@@ -53,7 +53,10 @@ const projectDialog = document.querySelector(".add-project-dialog");
 const taskDialog = document.querySelector(".add-task-dialog");
 const editTaskDialog = document.querySelector(".edit-task-dialog");
 
+let previousActiveProject = activeProject;
+
 addProjectButton.addEventListener("click", () => {
+    previousActiveProject = activeProject;
     addProjectForm.reset();
     projectDialog.showModal();
 });
@@ -61,6 +64,15 @@ addProjectButton.addEventListener("click", () => {
 const cancelProjectButton = document.querySelector(".cancel-project-btn");
 cancelProjectButton.addEventListener("click", () => {
     projectDialog.close();
+    activeProject = previousActiveProject;
+    document.querySelector('.active-project').classList.remove('active-project');
+    document.querySelectorAll('.menu-item').forEach(item => {
+        if (item.querySelector('span:nth-child(2)').textContent === activeProject.title) {
+            item.classList.add('active-project');
+        }
+    });
+    populateTasksUI(activeProject.tasks);
+    addTaskCardEventListeners();
 });
 
 addProjectForm.addEventListener("submit", function(event) {
@@ -112,17 +124,19 @@ cancelEditTaskButton.addEventListener("click", () => {
 });
 
 document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-        const projectName = e.target.querySelector('span:nth-child(2)').textContent;
-        const newActiveProject = projects.find(project => project.title === projectName);
-        if (newActiveProject) {
-            document.querySelector('.active-project').classList.remove('active-project');
-            e.target.classList.add('active-project');
-            activeProject = newActiveProject;
-            populateTasksUI(activeProject.tasks);
-            addTaskCardEventListeners();
-        }
-    });
+    if (!item.classList.contains('add-project')) {
+        item.addEventListener('click', (e) => {
+            const projectName = e.target.querySelector('span:nth-child(2)').textContent;
+            const newActiveProject = projects.find(project => project.title === projectName);
+            if (newActiveProject) {
+                document.querySelector('.active-project').classList.remove('active-project');
+                e.target.classList.add('active-project');
+                activeProject = newActiveProject;
+                populateTasksUI(activeProject.tasks);
+                addTaskCardEventListeners();
+            }
+        });
+    }
 });
 
 editTaskForm.addEventListener("submit", function(event) {

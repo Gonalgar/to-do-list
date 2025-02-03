@@ -199,6 +199,7 @@ addProjectForm.addEventListener("submit", function(event) {
     saveData(projects);
     projectDialog.close();
     setActiveProject(project);
+    addMenuItemEventListeners();
 });
 
 const addTaskButton = document.querySelector(".add-task");
